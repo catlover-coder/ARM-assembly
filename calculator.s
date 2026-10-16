@@ -34,10 +34,10 @@ _start:
 
 	//symbole
 	MOV r7, #3
-        MOV r0, #0
-        LDR r1, =buffer_Sym
-        MOV r2, #2
-        SVC #0
+    MOV r0, #0
+    LDR r1, =buffer_Sym
+    MOV r2, #2
+    SVC #0
 
 	LDR r1, =buffer_Sym
 	LDRB r10, [r1]
