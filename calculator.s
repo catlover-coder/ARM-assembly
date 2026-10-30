@@ -42,6 +42,42 @@ _start:
 	LDR r1, =buffer_Sym
 	LDRB r10, [r1]
 
+	cmp r10, #0x2B
+	BEQ add_func
+
+	cmp r10, #0x2D
+	BEQ sub_func
+
+	cmp r10, #0x2A
+	BEQ mult_func
+
+	cmp r10, #0x2F
+	BEQ div_func
+
+	BAL exit_program
+
+add_func:
+        ADD r0, r9, r11          // r0 = r9 + r11
+        BAL print_result
+
+sub_func:
+        SUB r0, r9, r11          // r0 = r9 - r11
+        BAL print_result
+
+mult_func:
+        MUL r0, r9, r11          // r0 = r9 * r11
+        BAL print_result
+
+div_func:
+        SDIV r0, r9, r11
+	BAL print_result
+
+exit_program:
+        MOV r7, #1               // Linux kernel system call for exit (sys_exit)
+        MOV r0, #0               // Return code 0 (Success)
+        SVC #0                   // Supervisor call to trigger the exit
+
+
 converter:
 	LDRB r3, [r1]
 	CMP r3, #10
